@@ -116,7 +116,6 @@ void set_player_current_vehicle(LPCSTR modelName) {
 		AUDIO::SET_VEHICLE_RADIO_ENABLED(veh, false);
 		PED::SET_PED_INTO_VEHICLE(PLAYER::PLAYER_PED_ID(), veh, -1);
 
-
 		WAIT(0);
 		STREAMING::SET_MODEL_AS_NO_LONGER_NEEDED(model);
 		ENTITY::SET_VEHICLE_AS_NO_LONGER_NEEDED(&veh);
@@ -126,12 +125,14 @@ void set_player_current_vehicle(LPCSTR modelName) {
 void main() {
 	//bool widescreen = GRAPHICS::GET_IS_WIDESCREEN();
 
+	bool randomCarsEnabled = false;
+
 	Any cumulativeStuntJumpsCompleted = GAMEPLAY::_0x6856EC3D35C81EA4();
 	int previousRandVehicleIndex = -1;
 
 	while (true) {
-		/*playerPed = PLAYER::PLAYER_PED_ID();
-		widescreen = GRAPHICS::GET_IS_WIDESCREEN();*/
+		// playerPed = PLAYER::PLAYER_PED_ID();
+		//widescreen = GRAPHICS::GET_IS_WIDESCREEN();
 
 		/*char statName[16] = "USJS_COMPLETED";
 		Hash statHash = GAMEPLAY::GET_HASH_KEY(statName);
@@ -146,19 +147,26 @@ void main() {
 		Any cmJumps = GAMEPLAY::_0x6856EC3D35C81EA4();
 
 		if (cmJumps > cumulativeStuntJumpsCompleted) {
-			int randVehicleIndex = (rand() % 268);
-			while (randVehicleIndex == previousRandVehicleIndex) {
-				randVehicleIndex = (rand() % 268);
-			}
-			LPCSTR randVehicleModel = vehicleModels[randVehicleIndex];
 
-			set_player_current_vehicle(randVehicleModel);
+			if (randomCarsEnabled) {
+				int randVehicleIndex = (rand() % 268);
+				while (randVehicleIndex == previousRandVehicleIndex) {
+					randVehicleIndex = (rand() % 268);
+				}
+				LPCSTR randVehicleModel = vehicleModels[randVehicleIndex];
+
+				set_player_current_vehicle(randVehicleModel);
+				previousRandVehicleIndex = randVehicleIndex;
+			}
+			else {
+				randomCarsEnabled = true;
+			}
 			cumulativeStuntJumpsCompleted = cmJumps;
-			previousRandVehicleIndex = randVehicleIndex;
 		}
 
 		//char coords[128];
 
+		//sprintf_s(coords, "RANDOM CARS ENABLED: %i", randomCarsEnabled);
 		//sprintf_s(coords, "STUNT IN PROGRESS: %i, STUNT RESULTS OPEN: %i, STUNT JUMPS COMPLETED: %lu (%lu)", stuntJumpInProgress, stuntJumpResultsOpen, stuntJumpsCompleted, cumulativeStuntJumpsCompleted);
 		//widescreen ? draw_text(coords, 0.205 - 0.03, 0.9, 0.5) : draw_text(coords, 0.205, 0.9, 0.5);
 
