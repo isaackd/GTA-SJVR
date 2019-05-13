@@ -1,6 +1,7 @@
 # GTA-SJVR
 
 Switches to a random vehicle each time a stunt jump is successfully landed.
+Includes a simple menu to manually change vehicles and load collections that can be accessed by pressing F4.
 
 ## Requirements
 - ScriptHookV
