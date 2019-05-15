@@ -5,6 +5,7 @@ Includes a simple menu to manually change vehicles and load collections that can
 
 ## Requirements
 - ScriptHookV
+  - Follow the installation instructions from [here](https://www.gta5-mods.com/tools/script-hook-v).
 
 ## Installation
 1. Build or download the latest release
