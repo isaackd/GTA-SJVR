@@ -446,20 +446,19 @@ void main() {
 
 	Any cumulativeStuntJumpsCompleted = GAMEPLAY::_0x6856EC3D35C81EA4();
 
+	char statName[32] = "SP_UNDER_THE_BRIDGE_COUNT";
+	Hash statHash = GAMEPLAY::GET_HASH_KEY(statName);
+
+	int bridgesFlownUnder;
+	STATS::STAT_GET_INT(statHash, &bridgesFlownUnder, -1);
+
 	while (true) {
 		// playerPed = PLAYER::PLAYER_PED_ID();
 		//widescreen = GRAPHICS::GET_IS_WIDESCREEN();
 
-		/*char statName[16] = "USJS_COMPLETED";
-		Hash statHash = GAMEPLAY::GET_HASH_KEY(statName);
-
-		int stuntJumpsCompleted;
-		STATS::STAT_GET_INT(statHash, &stuntJumpsCompleted, -1);*/
-
 		/*bool stuntJumpInProgress = GAMEPLAY::IS_STUNT_JUMP_IN_PROGRESS();
 		bool stuntJumpResultsOpen = GAMEPLAY::_0x2272B0A1343129F4();*/
 
-		//Any stuntJumpsCompleted = GAMEPLAY::_0x996DD1E1E02F1008();
 		Any cmJumps = GAMEPLAY::_0x6856EC3D35C81EA4();
 
 		if (cmJumps > cumulativeStuntJumpsCompleted) {
@@ -472,6 +471,16 @@ void main() {
 				randomCarsEnabled = true;
 			}
 			cumulativeStuntJumpsCompleted = cmJumps;
+		}
+
+		int updatedBridgesFlownUnder;
+		STATS::STAT_GET_INT(statHash, &updatedBridgesFlownUnder, -1);
+
+		if (updatedBridgesFlownUnder > bridgesFlownUnder) {
+			std::string randVehicleModel = get_random_vehicle_model();
+			set_player_current_vehicle(randVehicleModel);
+
+			bridgesFlownUnder = updatedBridgesFlownUnder;
 		}
 
 		if (menu_switch_pressed()) {
