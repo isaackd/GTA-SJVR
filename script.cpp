@@ -453,6 +453,13 @@ void main() {
 	STATS::STAT_GET_INT(statHash, &bridgesFlownUnder, -1);
 
 	while (true) {
+		//If you're in a taxi, triggers a random vehicle
+		if(PED::IS_PED_IN_ANY_VEHICLE(PLAYER::PLAYER_PED_ID(), true)) {
+			if(ENTITY::GET_ENTITY_MODEL(PED::GET_VEHICLE_PED_IS_IN(PLAYER::PLAYER_PED_ID(), true)) == GAMEPLAY::GET_HASH_KEY("TAXI")) {
+				set_player_current_vehicle(get_random_vehicle_model());
+			}
+		}
+
 		// playerPed = PLAYER::PLAYER_PED_ID();
 		//widescreen = GRAPHICS::GET_IS_WIDESCREEN();
 
