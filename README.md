@@ -8,7 +8,7 @@ Includes a simple menu to manually change vehicles and load collections that can
   - Follow the installation instructions from [here](https://www.gta5-mods.com/tools/script-hook-v).
 
 ## Installation
-1. Build or download the latest release
+1. Build master or download the latest release
 2. Place `VehicleRandomizer.asi` in the same directory as `ScriptHookV.dll`
 
 ## Vehicle Collections
